@@ -2,15 +2,15 @@
 
 #Define coin specific var
 COIN_NAME='Akula'
-COIN_DOWNLOAD_URL='https://github.com/zoldur/Akula/releases/download/v2.0.0.3/akula.tar.gz'
-FILE_NAME='akula.tar.gz'
+COIN_DOWNLOAD_URL='https://github.com/m4xcrypto/MasternodeInstaller/raw/master/Akula/Release/akula-2.0.0.3.tar.gz'
+FILE_NAME='akula-2.0.0.3.tar.gz'
 COIN_PORT=46782
 RPC_PORT=33000
 CONF_FILE='akula.conf'
 DATA_FOLDER='/root/.akula'
 COIN_DAEMON='akulad'
 COIN_CLI='akula-cli'
-BLOCKS_API='http://pyro.evo.today/api/getblockcount'
+#BLOCKS_API='http://pyro.evo.today/api/getblockcount'
 
 #Define global var (same for all masternodes)
 BIN_PATH='/usr/local/bin/'

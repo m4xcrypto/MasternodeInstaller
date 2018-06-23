@@ -2,8 +2,8 @@
 
 #Define coin specific var
 COIN_NAME='Pyro'
-COIN_DOWNLOAD_URL='https://github.com/zoldur/Akula/releases/download/v2.0.0.3/akula.tar.gz'
-FILE_NAME='akula.tar.gz'
+COIN_DOWNLOAD_URL='https://github.com/m4xcrypto/MasternodeInstaller/raw/master/Pyro/Release/pyro.tar.gz'
+FILE_NAME='pyro.tar.gz'
 COIN_PORT=9669
 CONF_FILE='pyro.conf'
 DATA_FOLDER='/root/.pyrocore'
