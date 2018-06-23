@@ -35,8 +35,8 @@ if [[ `df -k --output=avail / | tail -n1` -lt 10485760 ]]; then
 fi
 
 #read online the list of supported projects
-#rm MNList.txt 2>/dev/null
-#wget https://raw.githubusercontent.com/m4xcrypto/MasternodeInstaller/master/MNList.txt 2>/dev/null
+rm MNList 2>/dev/null
+wget https://raw.githubusercontent.com/m4xcrypto/MasternodeInstaller/master/MNList 2>/dev/null
 
 N=0
 CRYPTONAME=()
@@ -48,8 +48,9 @@ while read a b c; do
   CRYPTOLINK[$N]=$b
   ((N++))
   shift
-done < MNList.txt
+done < MNList
 
+echo $N
 echo -e " 
  *** ${RED}AVAILABLE MASTERNODES : ${NC}
 "
@@ -61,16 +62,16 @@ do
 done
 
 #Read user input until this is a number
-until [[ ${number} =~ ^[0-9]+$ ]]; do
+until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
         echo -e "
- ** ${RED}SELECT YOUR MASTERNODE ${NC}"
+ *** ${RED}SELECT YOUR MASTERNODE ${NC}"
         read number
 done
 
 #get the right MN script from online serv
-#wget ${CRYPTONAME[$y]}
+wget ${CRYPTONAME[$number]}
 
 #Run downloaded install script
-bash akula.sh
+#bash akula.sh
 
-echo "retour script 1"
+echo "fin script 1"
