@@ -69,7 +69,7 @@ until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
 done
 
 #get the right MN script from online serv
-wget ${CRYPTONAME[$number]}
+wget ${CRYPTOLINK[$number]} 2>/dev/null
 
 #Run downloaded install script
 #bash akula.sh
