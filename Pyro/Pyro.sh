@@ -4,6 +4,7 @@
 COIN_NAME='Pyro'
 COIN_DOWNLOAD_URL='https://github.com/m4xcrypto/MasternodeInstaller/raw/master/Pyro/Release/pyro.tar.gz'
 FILE_NAME='pyro.tar.gz'
+COIN_GIT='https://github.com/pyrocoindev/pyro'
 COIN_PORT=9669
 CONF_FILE='pyro.conf'
 DATA_FOLDER='/root/.pyrocore'
@@ -15,8 +16,15 @@ BLOCKS_API='http://pyro.evo.today/api/getblockcount'
 BIN_PATH='/usr/local/bin/'
 SERV_IP=$(curl -s4 api.ipify.org)
 
-RED='\033[0;31m'
 NC='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+MAGENTA='\033[00;35m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+WHITE='\033[01;37m'
 
 
 #Check previous installation
@@ -39,68 +47,46 @@ function check_already_installed() {
 
 #Install packages for many types of masternodes
 function install_packages() {
+
+	echo -e " 
+ *** ${MAGENTA}PREPARING SYSTEM ${NC}
+"
+
 	#upgrade system
 	apt-get -qq update
 	apt-get -qq upgrade
 	apt-get -qq dist-upgrade
 	apt-get -qq autoremove
+		
+	#install utilities
+	apt-get -y install nano > /dev/null
+	apt-get -y install git > /dev/null
+	apt-get -y install htop > /dev/null	
+	apt-get -y install software-properties-common > /dev/null
+	apt-get -y install libtool > /dev/null
+	apt-get -y install build-essential > /dev/null
+	apt-get -y install pkg-config > /dev/null
+	apt-get -y install autotools-dev > /dev/null
+	apt-get -y install libssl-dev > /dev/null
+	apt-get -y install libboost-all-dev > /dev/null
+	apt-get -y install libevent-dev > /dev/null
+	apt-get -y install libminiupnpc-dev > /dev/null
+	apt-get -y install automake > /dev/null
+	apt-get -y install autoconf > /dev/null
 	
 	#add bitcoin repository
 	add-apt-repository -y ppa:bitcoin/bitcoin > /dev/null
 	apt-get -qq update > /dev/null
-	
-	#install utilities
-	apt-get -y install nano > /dev/null
-	apt-get -y install unzip > /dev/null
-	apt-get -y install make > /dev/null
-	apt-get -y install sudo > /dev/null
-	apt-get -y install automake > /dev/null
-	apt-get -y install autoconf > /dev/null
-	apt-get -y install autogen > /dev/null
-	apt-get -y install git > /dev/null
-	apt-get -y install htop > /dev/null
-	apt-get -y install wget > /dev/null
-	apt-get -y install curl > /dev/null
-	apt-get -y install ufw > /dev/null
-	apt-get -y install systemd > /dev/null
-	apt-get -y install aptitude > /dev/null
-	apt-get -y install software-properties-common > /dev/null
-	apt-get -y install build-essential > /dev/null
-	apt-get -y install bsdmainutils > /dev/null
-	apt-get -y install pkg-config > /dev/null
-	apt-get -y install autotools-dev > /dev/null
-
-	#install lib packages	
-	apt-get -y install libtool > /dev/null
-	apt-get -y install libssl-dev > /dev/null
-	apt-get -y install libboost-all-dev > /dev/null
-	apt-get -y install libboost-dev > /dev/null
-	apt-get -y install libboost-chrono-dev > /dev/null
-	apt-get -y install libboost-filesystem-dev > /dev/null
-	apt-get -y install libboost-program-options-dev > /dev/null
-	apt-get -y install libboost-system-dev > /dev/null
-	apt-get -y install libboost-test-dev > /dev/null
-	apt-get -y install libboost-thread-dev > /dev/null
-	apt-get -y install libdb++-dev > /dev/null
 	apt-get -y install libdb4.8-dev > /dev/null	
 	apt-get -y install libdb4.8++-dev > /dev/null
-	apt-get -y install libdb5.3++ > /dev/null
-	apt-get -y install libminiupnpc-dev > /dev/null
-	apt-get -y install libgmp-dev > /dev/null
-	apt-get -y install libgmp3-dev > /dev/null
-	apt-get -y install libzmq3-dev > /dev/null
-	apt-get -y install libzmq5 > /dev/null
-	apt-get -y install libevent-dev > /dev/null
-	apt-get -y install libcrypto++-dev > /dev/null
-	apt-get -y install libqrencode-dev > /dev/null
-	apt-get -y install libminiupnpc-dev > /dev/null	
-	apt-get -y install libevent-dev > /dev/null	
-	
-	aptitude -y -q install fail2ban
-	service fail2ban restart
+	apt-get -y install bsdmainutils > /dev/null
 }
 
 function download_mn() {
+
+	echo -e " 
+ *** ${MAGENTA}DOWNLOADING HOT WALLET ${NC}
+"
 	mkdir $COIN_NAME
 	cd $COIN_NAME
 	wget $COIN_DOWNLOAD_URL
@@ -108,11 +94,23 @@ function download_mn() {
 	chmod +x $BIN_PATH$COIN_DAEMON
 	chmod +x $BIN_PATH$COIN_CLI
 	cd ..
-	rm -rf $COIN_NAME
-	
+	rm -rf $COIN_NAME	
+}
+
+function clone_git() {
+	git clone $COIN_GIT
+	cd pyro
+	./autogen.sh
+	./configure
+	make
+	cd src
 }
 
 function conf_mn() {
+	echo -e " 
+ *** ${MAGENTA}SETTING UP THE MASTERNODE ${NC}
+"
+
 	#Unblock MN port
 	ufw allow ssh
 	ufw allow $COIN_PORT/tcp
@@ -120,7 +118,9 @@ function conf_mn() {
 	#Read MN privkey
 	while [[ -z "$MN_KEY" ]]
 	do
-		echo -e "Enter your ${RED}$COIN_NAME Masternode Private Key${NC}"
+		echo -e "
+ *** PLEASE INPUT YOUR ${RED}$COIN_NAME ${NC}MASTERNODE PRIVATE KEY
+"
 		read -e MN_KEY
 	done
 	
@@ -186,6 +186,9 @@ EOF
 }
 
 function launch_mn() {
+	echo -e " 
+ *** ${MAGENTA}STARTING $COIN_NAME DAEMON ${NC}
+"
 	#launch_mn
 	$COIN_DAEMON -daemon
 	sleep 3
@@ -197,11 +200,11 @@ function sync_blocks() {
 	TotalBlocks=$(curl $BLOCKS_API 2>/dev/null)
 	
 	until [ $SyncedBlocks -eq $TotalBlocks ] ; do
-		SyncedBlocks=$($COIN_CLI getblockcount)
 		TotalBlocks=$(curl $BLOCKS_API 2>/dev/null)
+		SyncedBlocks=$($COIN_CLI getblockcount)
 		clear
 		echo -e " 
- *** ${RED}BLOCKCHAIN SYNCHRONIZATION IN PROGRESS : ${NC}$SyncedBlocks / $TotalBlocks
+ *** ${MAGENTA}BLOCKCHAIN SYNCHRONIZATION IN PROGRESS : ${NC}$SyncedBlocks / $TotalBlocks
 "
         sleep 3
     done
@@ -211,14 +214,14 @@ function wait_mn_activation() {
 	#Wait remonte activation
 	clear
 	echo -e " 
- *** ${RED}WAITING REMOTE ACTIVATION : ${NC}Go to your wallet and start masternode
+ *** WAITING ${RED}REMOTE ACTIVATION : ${NC}GO TO YOUR WALLET AND START MASTERNODE
 "
 	until $COIN_CLI masternode status 2>/dev/null | grep 'successfully' > /dev/null; do
 		sleep 3
 	done
 	
 	echo -e " 
- *** ${RED}CONGRATULATIONS ! ${NC}Your masternode is now running.
+ *** ${GREEN}CONGRATULATIONS ! YOUR MASTERNODE IS NOW RUNNING
 "
 }
 
