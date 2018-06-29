@@ -4,8 +4,15 @@ clear
 #This Script will allow the user to install many different masternodes
 #m4x_crypto 2018
 
-RED='\033[0;31m'
 NC='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+MAGENTA='\033[00;35m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+WHITE='\033[01;37m'
 
 echo -e "
  *** WELCOME TO ${RED}M4XCRYPTO MULTI MASTERNODES INSTALLER${NC}
@@ -69,4 +76,9 @@ rm $FILE_NAME 2>/dev/null
 wget ${CRYPTOLINK[$number]} 2>/dev/null
 
 #Run downloaded install script
+<<<<<<< HEAD
 bash $FILE_NAME
+=======
+SCRIPT_NAME=
+bash $SCRIPT_NAME
+>>>>>>> c327c58993700e9a67a5aee7c94b1edf4e21cc19
