@@ -8,13 +8,8 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 echo -e "
- **************************************************
- **                                              **
- **        ${RED}M4XCRYPTO ${NC}MASTERNODE INSTALLER        **
- **                                              **
- **            for Ubuntu 16.04 only             **
- **                                              **
- **************************************************
+ *** WELCOME TO ${RED}M4XCRYPTO MULTI MASTERNODES INSTALLER${NC}
+ *** for Ubuntu 16.04 only
 "
 
 #run basic checks (root, ram, free space)
@@ -58,7 +53,7 @@ echo -e "
 #display selection menu
 for (( y=0; y<$N; y++ ))
 do
-        echo "    $y - ${CRYPTONAME[$y]}"
+        echo "     $y - ${CRYPTONAME[$y]}"
 done
 
 #Read user input until this is a number
@@ -69,9 +64,9 @@ until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
 done
 
 #get the right MN script from online serv
+FILE_NAME=$(echo ${CRYPTOLINK[$number]} | awk -F'/' '{print $NF}')
+rm $FILE_NAME 2>/dev/null
 wget ${CRYPTOLINK[$number]} 2>/dev/null
 
 #Run downloaded install script
-#bash akula.sh
-
-echo "fin script 1"
+bash $FILE_NAME
