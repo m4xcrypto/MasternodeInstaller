@@ -2,8 +2,8 @@
 
 #Define coin specific var
 COIN_NAME='AIRIN'
-COIN_DOWNLOAD_URL='https://github.com/airincoin/airin/releases/download/2.1.2.0/ubuntu_16.04_daemon.tar.gz'
-FILE_NAME='ubuntu_16.04_daemon.tar.gz'
+COIN_DOWNLOAD_URL='https://github.com/m4xcrypto/MasternodeInstaller/raw/master/Airin/Release/airin.tar.gz'
+FILE_NAME='airin.tar.gz'
 #COIN_GIT=''
 COIN_PORT=18821
 COIN_RPC=18822
