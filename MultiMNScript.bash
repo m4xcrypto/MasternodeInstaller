@@ -52,7 +52,6 @@ while read a b c; do
   shift
 done < MNList
 
-echo $N
 echo -e " 
  *** ${RED}AVAILABLE MASTERNODES : ${NC}
 "

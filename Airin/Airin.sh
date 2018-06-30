@@ -54,10 +54,10 @@ function install_packages() {
 "
 
 	#upgrade system
-	apt-get -qq update
-	apt-get -qq upgrade
-	apt-get -qq dist-upgrade
-	apt-get -qq autoremove
+	apt-get -qq update > /dev/null
+	apt-get -qq upgrade > /dev/null
+	apt-get -qq dist-upgrade > /dev/null
+	apt-get -qq autoremove > /dev/null
 	
 	#add bitcoin repository
 	add-apt-repository -y ppa:bitcoin/bitcoin > /dev/null
@@ -71,7 +71,7 @@ function install_packages() {
 	apt-get -y install libtool > /dev/null
 	apt-get -y install build-essential > /dev/null
 	apt-get -y install autotools-dev > /dev/null
-	apt-get -y install python-virtualenv
+	apt-get -y install python-virtualenv > /dev/null
 	apt-get -y pwgen > /dev/null
 	apt-get -y virtualenv > /dev/null
 	apt-get -y install pkg-config > /dev/null
@@ -97,8 +97,8 @@ function download_mn() {
 "
 	mkdir $COIN_NAME > /dev/null
 	cd $COIN_NAME > /dev/null
-	wget $COIN_DOWNLOAD_URL > /dev/null
-	tar -xvzf $FILE_NAME -C $BIN_PATH > /dev/null
+	wget $COIN_DOWNLOAD_URL > /dev/null 2>&1
+	tar xvzf $FILE_NAME -C $BIN_PATH > /dev/null
 	chmod +x $BIN_PATH$COIN_DAEMON > /dev/null
 	chmod +x $BIN_PATH$COIN_CLI > /dev/null
 	cd .. > /dev/null
