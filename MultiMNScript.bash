@@ -3,7 +3,7 @@ clear
 
 #This Script will allow the user to install many different masternodes
 #m4x_crypto 2018
-#bash <(curl https://github.com/m4xcrypto/MasternodeInstaller/raw/master/MultiMNScript.bash)
+#bash <(curl https://raw.githubusercontent.com/m4xcrypto/MasternodeInstaller/master/MultiMNScript.bash)
 
 NC='\033[0m'
 RED='\033[0;31m'
@@ -65,7 +65,7 @@ done
 #Read user input until this is a number
 until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
         echo -e "
- *** SELECT YOUR MASTERNODE (input number)${NC}"
+ *** ${MAGENTA}SELECT YOUR MASTERNODE : ${NC}INPUT THE MASTERNODE ID NUMBER"
         read number
 done
 
