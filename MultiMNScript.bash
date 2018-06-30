@@ -15,8 +15,8 @@ CYAN='\033[00;36m'
 WHITE='\033[01;37m'
 
 echo -e "
- *** WELCOME TO ${RED}M4XCRYPTO MULTI MASTERNODES INSTALLER${NC}
- *** for Ubuntu 16.04 only
+ *** ${CYAN}WELCOME TO M4XCRYPTO MULTI MASTERNODES INSTALLER${NC}
+ *** for Ubuntu ${MAGENTA}16.04 ${NC}only
 "
 
 #run basic checks (root, ram, free space)
@@ -52,8 +52,7 @@ while read a b c; do
   shift
 done < MNList
 
-echo -e " 
- *** ${RED}AVAILABLE MASTERNODES : ${NC}
+echo -e " *** ${MAGENTA}AVAILABLE MASTERNODES : ${NC}
 "
 
 #display selection menu
@@ -65,7 +64,7 @@ done
 #Read user input until this is a number
 until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
         echo -e "
- *** ${RED}SELECT YOUR MASTERNODE ${NC}"
+ *** SELECT YOUR MASTERNODE (input number)${NC}"
         read number
 done
 
