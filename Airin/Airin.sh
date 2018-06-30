@@ -186,14 +186,14 @@ function wait_mn_activation() {
 	#Wait remonte activation
 	clear
 	echo -e " 
- *** WAITING ${RED}REMOTE ACTIVATION : ${NC}GO TO YOUR WALLET AND START MASTERNODE
+ *** ${MAGENTA}WAITING REMOTE ACTIVATION : ${NC}GO TO YOUR WALLET AND START MASTERNODE
 "
 	until $COIN_CLI masternode status 2>/dev/null | grep 'successfully' > /dev/null; do
 		sleep 3
 	done
 	
 	echo -e " 
- *** ${GREEN}CONGRATULATIONS ! YOUR MASTERNODE IS NOW RUNNING
+ *** ${GREEN}CONGRATULATIONS ! YOUR MASTERNODE IS NOW RUNNING${NC}
 "
 }
 

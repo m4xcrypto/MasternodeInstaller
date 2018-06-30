@@ -3,6 +3,7 @@ clear
 
 #This Script will allow the user to install many different masternodes
 #m4x_crypto 2018
+#bash <(curl https://github.com/m4xcrypto/MasternodeInstaller/raw/master/MultiMNScript.bash)
 
 NC='\033[0m'
 RED='\033[0;31m'
