@@ -65,7 +65,7 @@ done
 #Read user input until this is a number
 until [[ ${number} =~ ^[0-9]+$ ]] && [[ $number -lt $N ]]; do
         echo -e "
- *** ${MAGENTA}SELECT YOUR MASTERNODE : ${NC}INPUT THE MASTERNODE ID NUMBER"
+ *** ${MAGENTA}SELECT YOUR MASTERNODE : ${NC}INPUT THE MASTERNODE ID NUMBER..."
         read number
 done
 
